@@ -1,6 +1,0 @@
-#include <Mario>
-
-int main()
-{
-
-}
