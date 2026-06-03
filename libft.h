@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 10:13:28 by vfreitas          #+#    #+#             */
-/*   Updated: 2026/06/01 17:18:15 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/03 15:07:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strtrim(char const *s1, char const *set);
+char	**ft_split(char const *s, char c);
 
 /*
 ** Memory functions
@@ -64,5 +65,6 @@ char	*ft_strdup(const char *s);
 */
 
 int		ft_atoi(const char *nptr);
+char	*ft_itoa(int n);
 
 #endif
