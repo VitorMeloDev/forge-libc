@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 10:13:28 by vfreitas          #+#    #+#             */
-/*   Updated: 2026/06/03 15:07:24 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/03 17:24:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		ft_tolower(int c);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
