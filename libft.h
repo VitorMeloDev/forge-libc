@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 10:13:28 by vfreitas          #+#    #+#             */
-/*   Updated: 2026/06/03 18:14:16 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/03 20:27:06 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stddef.h>
 # include <stdlib.h>
-
+# include <unistd.h>
 /*
 ** Character checks
 */
@@ -35,6 +35,9 @@ size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putendl_fd(char *s, int fd);
 
 char	*ft_strchr(const char *s, int c);
 char	*ft_strrchr(const char *s, int c);
@@ -68,5 +71,7 @@ char	*ft_strdup(const char *s);
 
 int		ft_atoi(const char *nptr);
 char	*ft_itoa(int n);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putnbr_fd(int n, int fd);
 
 #endif
