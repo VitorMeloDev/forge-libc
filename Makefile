@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vmelo <vmelo@student.42sp.org.br>         +#+  +:+       +#+         #
+	#    By: vmelo <vmelo@student.42sp.org.br>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/27                               #+#    #+#              #
 #    Updated: 2026/05/27                               ###   ########.fr        #
@@ -52,7 +52,8 @@ SRC =	ft_isalpha.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
 		ft_putnbr_fd.c \
-		ft_putnbr_fd.c
+		ft_putnbr_fd.c \
+		ft_lstnew.c
 
 OBJ = $(SRC:.c=.o)
 
