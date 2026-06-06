@@ -5,78 +5,87 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/01 18:47:27 by marvin            #+#    #+#             */
-/*   Updated: 2026/06/03 13:03:55 by marvin           ###   ########.fr       */
+/*   Created: 2026/05/22 10:19:40 by fsayuri-          #+#    #+#             */
+/*   Updated: 2026/06/05 21:02:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		vm_words(char const *s, char c);
-char	*add_str(char const *str, int start, int end);
+static int	ft_count_words(char const *s, char c)
+{
+	int		i;
+	int		is_word;
+
+	i = 0;
+	is_word = 1;
+	while (*s)
+	{
+		if (*s != c && is_word)
+		{
+			is_word = 0;
+			i++;
+		}
+		if (*s == c)
+			is_word = 1;
+		s++;
+	}
+	return (i);
+}
+
+static char	*ft_get_word(char const *s, char c)
+{
+	int		str_len;
+	char	*p;
+
+	str_len = 0;
+	while (s[str_len] && s[str_len] != c)
+		str_len++;
+	p = ft_calloc(sizeof(char), str_len + 1);
+	if (!p)
+		return (NULL);
+	ft_strlcpy(p, s, str_len + 1);
+	return (p);
+}
+
+static void	ft_free_word(char **p)
+{
+	int	i;
+
+	if (!p)
+		return ;
+	i = 0;
+	while (p[i])
+	{
+		free(p[i]);
+		i++;
+	}
+	free(p);
+}
 
 char	**ft_split(char const *s, char c)
 {
-	char		**arr;
-	size_t		i;
-	size_t		start;
-	int			id_matrix;
-
-	arr = malloc(sizeof(char *) * vm_words(s, c) + 1);
-	if (!arr)
-		return (NULL);
-	i = -1;
-	start = 0;
-	id_matrix = 0;
-	while (i++ <= ft_strlen(s))
-	{
-		if (s[i] == '\0' || s[i] == c)
-		{
-			if (i > start)
-			{
-				arr[id_matrix] = add_str(s, start, i);
-				id_matrix++;
-			}
-			start = i + 1;
-		}
-	}
-	arr[id_matrix + 1] = NULL;
-	return (arr);
-}
-
-char	*add_str(char const *str, int start, int end)
-{
-	char	*s;
+	char	**p;
 	int		i;
 
-	s = malloc(sizeof(char) * (end - start + 1));
 	if (!s)
 		return (NULL);
+	p = ft_calloc(sizeof(char *), ft_count_words(s, c) + 1);
+	if (!p)
+		return (NULL);
 	i = 0;
-	while (start < end)
+	while (*s)
 	{
-		s[i] = str[start];
-		i++;
-		start++;
+		while (*s == c)
+			s++;
+		if (*s)
+		{
+			p[i] = ft_get_word(s, c);
+			if (!p[i++])
+				return (ft_free_word(p), NULL);
+			while (*s && *s != c)
+				s++;
+		}
 	}
-	s[i] = '\0';
-	return (s);
-}
-
-int	vm_words(char const *s, char c)
-{
-	int	words;
-	int	i;
-
-	if (!s)
-		return (0);
-	words = 0;
-	i = 0;
-	while (s[i] != '\0')
-	{
-		if (s[i] != c && (i == 0 || s[i - 1] == c))
-			words++;
-		i++;
-	}
-	return (words);
+	return (p);
 }
