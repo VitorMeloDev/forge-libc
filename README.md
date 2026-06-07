@@ -31,10 +31,10 @@ To use Libft in your own projects, include the header in your C files and link t
 
 Compile your project with:
 ```bash
-cc your_file.c -L. -lft -o your_program
+cc your_file.c libft.a -o your_program
 ```
 
-## Detailed Description
+## Librasy Description
 The library is divided into three main parts:
 
 ### Part 1: Libc Functions
@@ -62,9 +62,11 @@ A set of functions to manipulate a singly linked list structure:
 ## Resources
 - [Cppreference](https://cppreference.com/c)
 - [Man pages (Linux programmer's manual)](https://man7.org/linux/man-pages/index.html)
+- [Estrutura de dados usando C (Aaron M. Tenenbaum, Yedidyah Langsam, Moshe J. Augenstein)]
 
 ### AI Usage
 AI (ChatGPT) was used during this project for the following tasks:
-- **Prompt:** Using the description given in "AI Instructions," I created a prompt that would help me in developing and understanding the code. As recommended, I used it after reviewing it in my other resources.
+- **Prompt:** Using the description given in "AI Instructions," I created a prompt that would help me in developing and understanding the code.
+- **Learning:** Understanding C programming concepts such as pointers, memory allocation, and string manipulation. Having something visual to base myself on helped me understand better. As recommended, I used it after reviewing it in my other resources and colleagues.
 - **Documentation:** Structuring and drafting this `README.md` to ensure it meets all the curriculum requirements while maintaining a clear and natural tone.
-- **Makefile boilerplate:** Assisting in setting up the initial logic for the library compilation rules.
+- **Makefile Guidance:** Discussing the structure and purpose of Makefile rules used to build the library.

@@ -29,20 +29,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size_t	len;
 	char	*str;
 
+	if (!s1 || !set)
+		return (NULL);
 	len = ft_strlen(s1);
 	i = 0;
-	while (s1[i] != '\0')
-	{
-		if (vm_verify_ishere(s1[i], set) == 0)
-			break ;
+	while (s1[i] != '\0' && vm_verify_ishere(s1[i], set) == 1)
 		i++;
-	}
-	while (len >= i)
-	{
-		if (vm_verify_ishere(s1[len - 1], set) == 0)
-			break ;
+	while (len > i && vm_verify_ishere(s1[len - 1], set) == 1)
 		len--;
-	}
 	str = ft_substr(s1, i, len - i);
 	return (str);
 }
