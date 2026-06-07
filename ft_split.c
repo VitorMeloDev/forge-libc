@@ -5,87 +5,94 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/22 10:19:40 by fsayuri-          #+#    #+#             */
-/*   Updated: 2026/06/05 21:02:05 by marvin           ###   ########.fr       */
+/*   Created: 2026/06/06 21:36:09 by marvin            #+#    #+#             */
+/*   Updated: 2026/06/06 21:48:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_words(char const *s, char c)
-{
-	int		i;
-	int		is_word;
-
-	i = 0;
-	is_word = 1;
-	while (*s)
-	{
-		if (*s != c && is_word)
-		{
-			is_word = 0;
-			i++;
-		}
-		if (*s == c)
-			is_word = 1;
-		s++;
-	}
-	return (i);
-}
-
-static char	*ft_get_word(char const *s, char c)
-{
-	int		str_len;
-	char	*p;
-
-	str_len = 0;
-	while (s[str_len] && s[str_len] != c)
-		str_len++;
-	p = ft_calloc(sizeof(char), str_len + 1);
-	if (!p)
-		return (NULL);
-	ft_strlcpy(p, s, str_len + 1);
-	return (p);
-}
-
-static void	ft_free_word(char **p)
-{
-	int	i;
-
-	if (!p)
-		return ;
-	i = 0;
-	while (p[i])
-	{
-		free(p[i]);
-		i++;
-	}
-	free(p);
-}
+static void	free_arrays(char **arr);
+static char	*vm_get_word(char const *s, char c, char **arr);
+static int	vm_count_words(char const *s, char c);
 
 char	**ft_split(char const *s, char c)
 {
-	char	**p;
-	int		i;
+	char	**arr;
+	int		words;
+	int		id;
 
 	if (!s)
 		return (NULL);
-	p = ft_calloc(sizeof(char *), ft_count_words(s, c) + 1);
-	if (!p)
+	words = vm_count_words(s, c);
+	arr = ft_calloc(sizeof(char *), words + 1);
+	if (!arr)
 		return (NULL);
-	i = 0;
-	while (*s)
+	id = 0;
+	while (*s != '\0')
 	{
 		while (*s == c)
 			s++;
-		if (*s)
+		if (*s != '\0')
 		{
-			p[i] = ft_get_word(s, c);
-			if (!p[i++])
-				return (ft_free_word(p), NULL);
-			while (*s && *s != c)
+			arr[id] = vm_get_word(s, c, arr);
+			id++;
+			while (*s != '\0' && *s != c)
 				s++;
 		}
 	}
-	return (p);
+	arr[id] = NULL;
+	return (arr);
+}
+
+static void	free_arrays(char **arr)
+{
+	int	i;
+
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		i++;
+	}
+	free(arr);
+}
+
+static char	*vm_get_word(char const *s, char c, char **arr)
+{
+	int		len;
+	char	*str;
+
+	len = 0;
+	while (s[len] != '\0' && s[len] != c)
+		len++;
+	str = ft_substr(s, 0, len);
+	if (!str)
+		return (free_arrays(arr), NULL);
+	return (str);
+}
+
+static int	vm_count_words(char const *s, char c)
+{
+	int	count;
+	int	word;
+
+	count = 0;
+	word = 1;
+	while (*s != '\0')
+	{
+		if (*s != c && word == 1)
+		{
+			count++;
+			word = 0;
+		}
+		if (*s == c)
+		{
+			word = 1;
+		}
+		s++;
+	}
+	return (count);
 }
